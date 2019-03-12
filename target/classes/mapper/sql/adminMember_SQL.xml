@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+
+	<select id="adminMemberList" parameterType="HashMap"
+		resultType="HashMap">
+	<![CDATA[
+			SELECT
+				MEMBER_NO,
+				MEMBER_ID,
+				MEMBER_NAME,
+				MEMBER_GENDER,
+				MEMBER_PHONE,
+				MEMBER_EMAIL,
+				MEMBER_YEAR,
+				MEMBER_MONTH,
+				MEMBER_DAY,
+				MEMBER_ZIPCODE,
+				MEMBER_ADDR1,
+				MEMBER_ADDR2,
+				MEMBER_ADDR3,
+				MEMBER_TOTAL,
+				MEMBER_MILEAGE,
+				MEMBER_MEM_GB,
+				TO_CHAR(MEMBER_REGDATE, 'YYYY.MM.DD') AS MEMBER_REGDATE 
+			FROM
+				KSM_MEMBER
+			WHERE
+				MEMBER_DEL_GB = 'N'
+			AND
+				MEMBER_MEM_GB<='50'
+			ORDER BY 
+				MEMBER_REGDATE 
+			DESC
+		]]>
+	</select>
+	<select id="adminMemberSearchList" parameterType="HashMap"
+		resultType="HashMap">
+			SELECT 
+				MEMBER_NO,
+				MEMBER_ID,
+				MEMBER_NAME,
+				MEMBER_GENDER,
+				MEMBER_PHONE,
+				MEMBER_EMAIL,
+				MEMBER_YEAR,
+				MEMBER_MONTH,
+				MEMBER_DAY,
+				MEMBER_ZIPCODE,
+				MEMBER_ADDR1,
+				MEMBER_ADDR2,
+				MEMBER_ADDR3,
+				MEMBER_TOTAL,
+				MEMBER_MILEAGE,
+				MEMBER_MEM_GB,
+				TO_CHAR(MEMBER_REGDATE, 'YYYY.MM.DD') AS MEMBER_REGDATE 
+			FROM 
+				KSM_MEMBER 
+			WHERE 
+				MEMBER_DEL_GB = 'N' 
+			AND
+			<if test='searchname.equals("sbasic")'>
+				MEMBER_ID LIKE '%${searchtext}%' OR MEMBER_NAME LIKE '%${searchtext}%' OR MEMBER_ADDR1 LIKE '%${searchtext}%' OR MEMBER_PHONE LIKE '%${searchtext}%'
+			</if>
+			<if test='searchname.equals("sid")'>
+				MEMBER_ID LIKE '%${searchtext}%'
+			</if>
+			<if test='searchname.equals("sname")'>
+				MEMBER_NAME LIKE '%${searchtext}%'
+			</if>
+			<if test='searchname.equals("saddr1")'>
+				MEMBER_ADDR1 LIKE '%${searchtext}%'
+			</if>  
+			<if test='searchname.equals("sphone")'>
+				MEMBER_PHONE LIKE '%${searchtext}%'
+			</if>    
+			ORDER BY 
+				MEMBER_REGDATE DESC
+	</select>
+	
+	<select id="adminMemberSearchList2" parameterType="HashMap"
+		resultType="HashMap">
+			SELECT 
+				MEMBER_NO,
+				MEMBER_ID,
+				MEMBER_NAME,
+				MEMBER_GENDER,
+				MEMBER_PHONE,
+				MEMBER_EMAIL,
+				MEMBER_YEAR,
+				MEMBER_MONTH,
+				MEMBER_DAY,
+				MEMBER_ZIPCODE,
+				MEMBER_ADDR1,
+				MEMBER_ADDR2,
+				MEMBER_ADDR3,
+				MEMBER_TOTAL,
+				MEMBER_MILEAGE,
+				MEMBER_MEM_GB,
+				TO_CHAR(MEMBER_REGDATE, 'YYYY.MM.DD') AS MEMBER_REGDATE 
+			FROM 
+				KSM_MEMBER 
+			WHERE 
+				MEMBER_DEL_GB = 'N' 
+			AND
+			<if test='searchname.equals("sContent2")'>
+				MEMBER_YEAR LIKE '%${searchtext}%' OR MEMBER_ID LIKE '%${searchtext}%' OR MEMBER_MONTH LIKE '%${searchtext}%' OR MEMBER_DAY LIKE '%${searchtext}%' OR MEMBER_TOTAL LIKE '%${searchtext}%' OR MEMBER_REGDATE LIKE '%${searchtext}%' 
+			</if>
+			ORDER BY 
+				MEMBER_REGDATE DESC
+	</select>
+	
+	<insert id="adminCouponCreate" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO COUPON
+			(
+				COU_NO,
+				COU_CONTENT,
+				COU_DISCOUNT,
+				COU_SDATE, 
+				COU_EDATE 
+			) 
+			VALUES
+			(
+				COUPON_NO_SEQ.NEXTVAL,
+				#{cou_content},
+				#{cou_discount},
+				#{cou_sdate},
+				#{cou_edate}
+			)
+		]]>
+	</insert>
+
+	<select id="adminCouponList" parameterType="HashMap"
+		resultType="HashMap">
+		<![CDATA[
+			SELECT
+				COU_NO,
+				COU_CONTENT,
+				COU_DISCOUNT,
+				TO_CHAR(COU_SDATE, 'YYYY-MM-DD') AS COU_SDATE, 
+				TO_CHAR(COU_EDATE, 'YYYY-MM-DD') AS COU_EDATE
+			FROM
+				COUPON
+			ORDER BY
+				COU_NO
+			DESC
+		]]>
+	</select>
+	
+	<select id="adminSearchCouponList" parameterType="HashMap"
+		resultType="HashMap">
+			SELECT
+				COU_NO,
+				COU_CONTENT,
+				COU_DISCOUNT,
+				TO_CHAR(COU_SDATE, 'YYYY-MM-DD') AS COU_SDATE, 
+				TO_CHAR(COU_EDATE, 'YYYY-MM-DD') AS COU_EDATE
+			FROM
+				COUPON
+			WHERE
+				<if test='searchname.equals("sContent")'>
+					 COU_CONTENT LIKE '%${searchtext}%' 
+				</if>
+				<if test='searchname.equals("sDiscount")'>
+					 COU_DISCOUNT LIKE '%${searchtext}%' 
+				</if>
+				<if test='searchname.equals("sDate")'>
+					 COU_SDATE LIKE '%${searchtext}%' OR COU_EDATE LIKE '%${searchtext}%' 
+				</if>
+			ORDER BY
+				COU_NO
+			DESC
+	</select>
+
+	<select id="couponInfo" parameterType="HashMap"
+		resultType="HashMap">
+		<![CDATA[
+			SELECT
+				COU_NO,
+				COU_CONTENT,
+				COU_DISCOUNT,
+				COU_SDATE,
+				COU_EDATE
+			FROM
+				COUPON
+			WHERE
+				COU_NO=#{cou_no}
+		]]>
+	</select>
+
+	<insert id="insertCouponInfo" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO COUPON_MEMLIST
+			(
+				COU_NO,
+				COU_ORIGIN_NO,
+				COU_CONTENT,
+				COU_DISCOUNT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID
+			) 
+			VALUES
+			(
+				coupon_memlist_seq.NEXTVAL,
+				#{cou_origin_no},
+				#{cou_content},
+				#{cou_discount},
+				#{cou_sdate},
+				#{cou_edate},
+				#{memid}	
+			) 
+		]]>
+	</insert>
+	<select id="delgb_y_list" parameterType="HashMap" resultType="HashMap">
+		SELECT
+				MEMBER_NO,
+				MEMBER_ID,
+				MEMBER_NAME,
+				MEMBER_GENDER,
+				MEMBER_PHONE,
+				MEMBER_EMAIL,
+				MEMBER_YEAR,
+				MEMBER_MONTH,
+				MEMBER_DAY,
+				MEMBER_ZIPCODE,
+				MEMBER_ADDR1,
+				MEMBER_ADDR2,
+				MEMBER_ADDR3,
+				MEMBER_TOTAL,
+				MEMBER_MILEAGE,
+				MEMBER_MEM_GB,
+				TO_CHAR(MEMBER_REGDATE, 'YYYY.MM.DD') AS MEMBER_REGDATE 
+			FROM
+				KSM_MEMBER
+			WHERE
+				MEMBER_DEL_GB = 'Y'
+			ORDER BY 
+				MEMBER_REGDATE 
+			DESC
+	</select>
+	<select id="delgb_y_list2" parameterType="HashMap" resultType="HashMap">
+		SELECT
+				MEMBER_NO,
+				MEMBER_ID,
+				MEMBER_NAME,
+				MEMBER_GENDER,
+				MEMBER_PHONE,
+				MEMBER_EMAIL,
+				MEMBER_YEAR,
+				MEMBER_MONTH,
+				MEMBER_DAY,
+				MEMBER_ZIPCODE,
+				MEMBER_ADDR1,
+				MEMBER_ADDR2,
+				MEMBER_ADDR3,
+				MEMBER_TOTAL,
+				MEMBER_MILEAGE,
+				MEMBER_MEM_GB,
+				TO_CHAR(MEMBER_REGDATE, 'YYYY.MM.DD') AS MEMBER_REGDATE 
+			FROM
+				KSM_MEMBER
+			WHERE
+				MEMBER_DEL_GB = 'Y'
+			AND
+			<if test='searchname.equals("sid")'>
+				MEMBER_ID LIKE '%${searchtext}%'
+			</if>
+			<if test='searchname.equals("sname")'>
+				MEMBER_NAME LIKE '%${searchtext}%'
+			</if>
+			<if test='searchname.equals("sphone")'>
+				MEMBER_PHONE LIKE '%${searchtext}%'
+			</if>
+			ORDER BY 
+				MEMBER_REGDATE 
+			DESC
+	</select>
+	<delete id="deleteMem" parameterType="HashMap">
+		DELETE FROM
+			KSM_MEMBER
+		WHERE
+			MEMBER_ID=#{member_id}
+	</delete>
+	<delete id="deleteAll" parameterType="HashMap">
+		DELETE FROM
+			KSM_MEMBER
+		WHERE
+			MEMBER_DEL_GB = 'Y'
+	</delete>
+	<update id="saveMember" parameterType="HashMap">
+		<![CDATA[
+			UPDATE 
+				KSM_MEMBER 
+			SET 
+				MEMBER_DEL_GB = 'N'
+			WHERE 
+				MEMBER_ID = #{member_id}
+		]]>
+	</update>
+	
+	<delete id="coupondelete" parameterType="HashMap">
+		DELETE FROM 
+			COUPON
+		WHERE
+			COU_NO=#{cou_no}
+	</delete>
+</mapper>

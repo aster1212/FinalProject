@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+#boardListTitle{
+	width: 100%;
+	margin: 0 auto;
+	height: 50px;
+	display: inline-block;
+	background: #dbf6ec;
+	font-size:32px;
+	text-align: center;
+}
+
+.qnaReplyContent{
+	width: 100%;
+	height: 150px;
+	font-size: 20px;
+}
+
+#parentViewDiv{
+	font-size: 20px;
+}
+
+.contentBtns{
+	
+	background:white;
+	width: 60px;
+	height: 30px;
+	border-style: none;
+	border: 2px solid #50DEAA;
+	border-radius: 12px;
+	margin: 0 0 0 5px;
+	outline: none;
+	font-size: 15px;
+}
+
+.writeText{
+	border: none;
+	border-bottom: 1px solid black;
+	outline: none;
+}
+
+/* adminBoardWriteForm */
+#boardWriteContentBox{
+	width: 70%;
+	min-height: 500px;
+	display: inline-block;
+	text-align: left;
+}
+
+.qnaContentLineBox{
+	width : inherit;
+	height: 30px;
+	line-height: 30px;
+	font-size : 18px;
+}
+
+#qnaTextareaBox{
+	height: 460px;
+}
+.qnaContentLineLeft{
+	width : 20%;
+	text-align: center;
+}
+.qnaContentRight{
+	width : 60%;
+}
+.qnaInline{
+	display: inline-block;
+}
+.qnaText{
+	width : 100%;
+	height : 100%;
+	padding : 0 5px;
+	font-size : 15px;
+	border: none;
+	border-bottom: 1px solid #999999;
+	outline: none;
+}
+#qnaTextareaBox{
+	width: 100%;
+	text-align: center;
+}
+.qnaTextArea{
+	width: 65%;
+	height: 80%;
+	margin:0 auto;
+	border-radius:10px;
+	padding : 20px;
+	font-size : 16px;
+	outline: none;
+}
+#qnaOptionBox{
+	width: 100%;
+	text-align: center;
+}

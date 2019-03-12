@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminOrder">
+
+	<select id="selectOrderList" parameterType="hashmap" resultType="hashmap">
+ 
+		<![CDATA[
+			SELECT 
+       	     ORDER_NO,
+       	     ORDER_ADDR,
+       	     MEMBER_ID,
+       	     ORDER_PHONE,
+       	     ORDER_NAME,
+       	     TO_CHAR(ORDER_DATE, 'YYYY.MM.DD') AS ORDER_DATE,
+       	     ORDER_STATE,
+       	     ORDER_PAYMENT,
+       	     ORDER_EXCHANGE,
+       	     ORDER_EMAIL,
+       	     ORDER_TOTALPAYMENT
+        FROM 
+            ORDERLIST
+		]]>
+
+	</select>
+	
+		<select id="processingList" parameterType="hashmap" resultType="hashmap">
+ 
+		<![CDATA[
+			SELECT 
+       	     ORDER_NO,
+       	     ORDER_ADDR,
+       	     MEMBER_ID,
+       	     ORDER_PHONE,
+       	     ORDER_NAME,
+       	     TO_CHAR(ORDER_DATE, 'YYYY.MM.DD') AS ORDER_DATE,
+       	     ORDER_STATE,
+       	     ORDER_PAYMENT,
+       	     ORDER_EXCHANGE,
+       	     ORDER_TOTALPAYMENT,
+       	     ORDER_EMAIL
+        FROM 
+            ORDERLIST
+        WHERE
+        	ORDER_STATE = #{ORDER_STATE}
+        OR
+        	ORDER_STATE = #{ORDER_STATE2}
+        OR
+        	ORDER_STATE = #{ORDER_STATE3}
+		]]>
+
+	</select>
+	
+			<!-- 전체리스트 검색 -->
+	<select id="searchAll" parameterType="hashmap" resultType="hashmap">
+	
+		<![CDATA[
+			SELECT 
+       	     ORDER_NO,
+       	     ORDER_ADDR,
+       	     MEMBER_ID,
+       	     ORDER_PHONE,
+       	     ORDER_NAME,
+       	     TO_CHAR(ORDER_DATE, 'YYYY.MM.DD') AS ORDER_DATE,
+       	     ORDER_STATE,
+       	     ORDER_PAYMENT,
+       	     ORDER_EXCHANGE,
+       	     ORDER_EMAIL,
+       	     ORDER_TOTALPAYMENT
+        FROM 
+            ORDERLIST
+        WHERE 
+            ${searchn} LIKE '%'||#{keyword}||'%'
+		]]>
+	</select>
+	
+			
+			<!-- 교환,환불,완료 리스트 검색 -->
+	<select id="searchOrder" parameterType="hashmap" resultType="hashmap">
+	
+		<![CDATA[
+			SELECT 
+       	     ORDER_NO,
+       	     ORDER_ADDR,
+       	     MEMBER_ID,
+       	     ORDER_PHONE,
+       	     ORDER_NAME,
+       	     TO_CHAR(ORDER_DATE, 'YYYY.MM.DD') AS ORDER_DATE,
+       	     ORDER_STATE,
+       	     ORDER_PAYMENT,
+       	     ORDER_EXCHANGE,
+       	     ORDER_EMAIL,
+       	     ORDER_TOTALPAYMENT
+        FROM 
+            ORDERLIST
+        WHERE 
+            ${searchn} LIKE '%'||#{keyword}||'%'
+            AND
+            ORDER_STATE = #{ORDER_STATE}
+ 
+		]]>
+	</select>
+	
+		<!-- 주문상세보기 1:orderList 저장된 정보 불러오기 -->
+	<select id="orderDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				ORDER_NO,
+       	     	ORDER_ADDR,
+       	     	MEMBER_ID,
+       	     	ORDER_PHONE,
+       	     	ORDER_NAME,
+       	     	TO_CHAR(ORDER_DATE, 'YYYY.MM.DD') AS ORDER_DATE,
+       	     	ORDER_STATE,
+       	     	ORDER_PAYMENT,
+       	     	ORDER_EXCHANGE,
+       	     	ORDER_EMAIL,
+       	     	ORDER_TOTALPAYMENT
+			FROM
+				ORDERLIST
+			WHERE
+				ORDER_NO = #{ORDER_NO}		
+		]]>
+	</select>
+		<!-- 주문상세보기2 : orderDetail정보 불러오기 -->
+	<select id="orderDetail2" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				ORDER_NO,
+       	     	ORDERITEM_NAME,
+       	     	ORDERITEM_COUNT,
+       	     	ORDERITEM_SIZE,
+       	     	ORDERITEM_COLOR,
+       	     	ORDERITEM_PRICE,
+       	     	ORDERITEM_STATE,
+       	     	ORDERITEM_OPTION
+			FROM
+				ORDERDETAIL
+			WHERE
+				ORDER_NO = #{ORDER_NO}		
+		]]>
+	</select>
+	
+	<update id="orderUpdate" parameterType="hashmap">
+		<![CDATA[
+			UPDATE ORDERDETAIL 
+			SET
+				ORDERITEM_STATE = #{ORDERITEM_STATE}
+			WHERE
+				ORDER_NO = #{ORDER_NO}	
+		]]>
+	</update>
+	
+	<update id="orderUpdate2" parameterType="hashmap">
+		<![CDATA[
+			UPDATE ORDERLIST 
+			SET
+				ORDER_STATE = #{ORDER_STATE}
+			WHERE
+				ORDER_NO = #{ORDER_NO}	
+		]]>
+	</update>
+	
+	<delete id="orderDelete" parameterType="hashmap">
+		<![CDATA[
+		delete
+		from ORDERDETAIL
+		where
+		ORDER_NO = #{ORDER_NO}	
+		]]>
+	</delete>
+	
+	<delete id="orderDelete2" parameterType="hashmap">
+		<![CDATA[
+		delete
+		from ORDERLIST
+		where
+		ORDER_NO = #{ORDER_NO}	
+		]]>
+	</delete>
+	
+	<!-- 각각의 기본값 0, 1 -->
+	<select id="salesPerMonth" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT 
+			sum(orderitem_price*orderitem_count) as sumResult,
+			extract(year from orderitem_date) as year,
+			extract(month from orderitem_date) as month
+		from
+			orderDetail
+		WHERE
+			ORDERITEM_DATE between (ADD_MONTHS( TRUNC(sysdate,'MM'), + (-24) ))
+		AND 
+			(ADD_MONTHS( TRUNC(sysdate,'MM'), + (1) )) 
+		GROUP BY 
+			extract(month from orderitem_date),
+			extract(year from orderitem_date)
+		order by year desc,	month desc
+			
+		]]>
+	</select>
+					<!-- 전체 인기아이템 리스트 -->
+		<select id="hotItemList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		
+			SELECT 
+				ORDERITEM_NAME, sum(ORDERITEM_COUNT) as COUNT
+			FROM 
+				ORDERDETAIL
+			GROUP BY 
+				ORDERITEM_NAME
+			ORDER BY 
+				COUNT desc
+			
+  		  ]]>
+		</select>
+
+
+					<!-- 월별 인기아이템 리스트 -->
+	<select id="hotItemListPeriod" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[		
+		
+		SELECT
+			ORDERITEM_NAME, sum(ORDERITEM_COUNT) as COUNT
+		FROM
+			ORDERDETAIL 
+		WHERE
+			ORDERITEM_DATE between (ADD_MONTHS( TRUNC(sysdate,'MM'), + (${INPUTNUM})))
+		AND 
+			(ADD_MONTHS( TRUNC(sysdate,'MM'), + (${INPUTNUM2}))) 
+		GROUP BY  
+			ORDERITEM_NAME
+		ORDER BY 
+			COUNT desc
+			
+  		  ]]>
+	</select>
+	
+
+
+
+	
+	
+</mapper>

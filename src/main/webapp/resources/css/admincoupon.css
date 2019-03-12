@@ -1,0 +1,449 @@
+@font-face { 
+	font-family: "NotoSansKR-Light"; 
+	src: url('../font/NotoSansKR-Light.otf');
+}
+#adminCouponCreateWrap
+{
+	width: 600px;
+	margin:0 auto;
+}
+#adminCouponCreateTitle
+{
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 30px;
+	font-weight:bold;
+	margin-top: 50px;
+}
+#createCoupon1
+{
+	margin-top: 100px;
+	margin-left:28px;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+}
+#cou_content
+{
+	border: #D5D5D5 1px solid;
+	border-radius: 7px;
+	outline:none;
+	text-align:center;
+	width: 300px;
+	height: 30px;
+}
+#createCoupon2
+{
+	margin-left: 14px;
+	margin-top: 30px;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+}
+#cou_discount
+{
+	border: #D5D5D5 1px solid;
+	border-radius: 7px;
+	outline:none;
+	text-align:center;
+	width: 150px;
+	height: 30px;
+}
+#createCoupon3
+{
+	margin-top: 30px;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+}
+#cou_sdate
+{
+	border: #D5D5D5 1px solid;
+	border-radius: 7px;
+	outline:none;
+	text-align:center;
+	width: 150px;
+	height: 30px;
+}
+#cou_edate
+{
+	border: #D5D5D5 1px solid;
+	border-radius: 7px;
+	outline:none;
+	text-align:center;
+	width: 150px;
+	height: 30px;
+}
+#createCouponBtn
+{
+	margin-top: 50px;
+	margin-left: 80px;
+}
+#createCouponBtn1
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	margin-left: 100px;
+}
+#createCouponBtn1:hover
+{
+	border: none;
+	outline:none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	margin-left: 100px;
+}
+
+
+/* ���������� �κ� */
+#adminSendCouponWrap
+{
+	width:700px;
+	height: 1024px;
+	margin:0 auto;
+}
+#adminSendCouponTitle
+{
+	margin-top: 50px;
+	text-align:center;
+	font-family: NotoSansKR-Light;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#adminCouponList1
+{
+	display:inline-table;
+	width:600px;
+	text-align:center;
+	margin-top: 40px;
+	border-collapse: collapse;
+	font-family: NotoSansKR-Light;
+	font-size: 14px;
+}
+thead
+{
+	background-color:silver;
+}
+th, td
+{
+	 text-align:center;
+	 border-bottom: 1px solid silver;
+     padding: 5px;
+}
+#adminCouponTr
+{
+	maring-left: 20px;
+}
+#CouponListPage
+{
+	margin-top: 300px;
+	text-align: center;
+}
+#CouponListSelect
+{
+	margin-top:20px;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	text-align:center;
+}
+#adminSendCouponMemList
+{
+	margin-top:20px;
+	text-align:center;
+}
+#searchname
+{
+	-webkit-appearance: none;
+	-moz-appearance: none; 
+	appearance: none; 
+	outline:none;
+	background: url('../upload/selectdown.png') no-repeat;
+	background-size: 10px;
+	background-position: right;
+	text-align:center;
+	width: 60px;
+	height: 25px;
+	border: #D5D5D5 1px solid;
+	border-radius: 7px;
+	padding-left:5px;
+}
+#searchtext{
+   width: 150px;
+   height: 25px;
+   padding-right :50px;
+   padding-left : 20px;
+   border-style: none;
+   border: 1px solid #D5D5D5;
+   border-radius: 10px;
+   top: 9px;
+   right: 24.5%;
+   outline: none;
+}
+#ListAdminSearchBtn
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 40px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 10px;
+	color:#FFFFFF;
+	margin-down:20px;
+}
+#ListAdminListBtn
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#ListAdminCouponSend
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#ListAdminSearchBtn:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 40px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 10px;
+	color:#FFFFFF;
+	margin-down:20px;
+}
+#ListAdminListBtn:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#ListAdminCouponSend:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#line22
+{
+	margin-top: 20px;
+	border-bottom : solid 1px;
+	color: #BDBDBD;
+	width:600px;
+}
+#getmemDiv
+{
+	margin-top:20px;
+	width: 300px;
+	height: 200px;
+	margin-left: 160px;
+}
+#getmemtitle
+{
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 20px;
+	font-weight:bold;
+	margin-top: 30px;
+	margin-left: 110px;
+}
+#line33
+{
+	margin-top: 5px;
+	border-bottom : solid 1px;
+	color: #BDBDBD;
+	width:300px;
+}
+#get
+{
+	border: 1px solid #BDBDBD;
+	height:200px;
+	overflow:scroll;	
+}
+#ListAdminCouponSend
+{
+	margin-left: 100px;
+}
+#coumemlistDiv
+{
+	margin-top: 50px;
+	text-align:center;
+}
+#searchdiv22
+{
+	margin-top:30px;
+	text-align:center;
+}
+#buttondiv22
+{
+	margin-top:60px;
+	text-align:center;
+}
+#send
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#memlistCouSearch
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 40px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 10px;
+	color:#FFFFFF;
+	margin-down:20px;
+}
+#button333
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#send:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#memlistCouSearch:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 40px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 10px;
+	color:#FFFFFF;
+	margin-down:20px;
+}
+#button333:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 13px;
+	color:#FFFFFF;
+}
+#deleteDiv
+{
+	margin-top:30px;
+	text-align:right;
+}
+#pagingmemlist
+{
+	margin-top: 80px;
+	text-align:center;
+}
+#searchmemlist
+{
+	margin-top: 50px;
+	text-align:center;
+}
+#adminCouponDelWrap
+{
+	width: 600px;
+	margin:0 auto;
+}
+#adminCouponDelTitle
+{
+	margin-top:50px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 30px;
+	font-weight: bold;
+}
+#arrStatus
+{
+	text-align:center;
+	margin-top:50px;
+}
+#adminCouponDelTable
+{
+	text-align:center;
+	width: 600px;
+}
+#windowAdminMemlist
+{
+	width:600px;
+	height:600px;
+	margin:0 auto;
+}
+input:focus::-webkit-input-placeholder
+{ 
+	color:transparent; 
+}
+

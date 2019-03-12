@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminItem">
+	
+	<select id="adminItemList" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				ITEM_NO,
+				ITEM_DATE,
+				ITEM_NAME,
+				ITEM_SHORTPATH,
+				ITEM_PRICE 
+			FROM 
+				ITEM 
+			ORDER BY ITEM_REGDATE DESC
+		]]>
+	</select>
+	
+	<select id="adminItemSearchList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				ITEM_NO,
+				ITEM_DATE,
+				ITEM_NAME,
+				ITEM_SHORTPATH,
+				ITEM_PRICE 
+			FROM 
+				ITEM 
+			WHERE 
+					ITEM_NAME LIKE '%${searchStr}%' 
+				OR 
+					ITEM_NO LIKE '%${searchStr}%' 
+			ORDER BY ITEM_REGDATE DESC
+				
+		]]>
+	</select>
+	
+	<select id="adminItemOne" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				ITEM_NO	,
+				ITEM_GENDER,	
+				ITEM_TYPE,	
+				ITEM_DATE,	
+				ITEM_NAME,	
+				ITEM_SIZE,	
+				ITEM_OPTION,	
+				ITEM_COLOR,
+				ITEM_SHORTPATH,	
+				ITEM_IMAGEPATH,	
+				ITEM_PRICE,	
+				ITEM_STOCK,	
+				ITEM_REGDATE,
+				ITEM_SET 
+			FROM 
+				ITEM 
+			WHERE 
+				ITEM_NO = #{ITEM_NO}
+		]]>
+	</select>
+	
+	<select id="adminSeqVal" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				NUM 
+			FROM 
+				JIN
+		]]>
+	</select>
+	
+	<update id="adminSeqUpdate">
+		<![CDATA[
+			UPDATE 
+				JIN 
+			SET 
+				NUM = NUM + 1
+		]]>
+	</update>
+	
+	<insert id="adminItemInsert" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO 
+				ITEM 
+				(
+				ITEM_STOCK,
+				ITEM_NAME,
+				ITEM_PRICE,
+				ITEM_DATE,
+				ITEM_NO,
+				ITEM_SIZE,
+				ITEM_OPTION,
+				ITEM_COLOR,
+				ITEM_SHORTPATH,
+				ITEM_IMAGEPATH,
+				ITEM_REGDATE,
+				ITEM_GENDER,
+				ITEM_TYPE,
+				ITEM_SET 
+				) 
+			VALUES 
+				(
+				#{ITEM_STOCK},
+				#{ITEM_NAME},
+				#{ITEM_PRICE},
+				#{ITEM_DATE},
+				ITEM_NO_SEQ.NEXTVAL,
+				#{ITEM_SIZE},
+				#{ITEM_OPTION},
+				#{ITEM_COLOR},
+				#{ITEM_SHORTPATH},
+				#{ITEM_IMAGEPATH},
+				sysdate,
+				#{ITEM_GENDER},
+				#{ITEM_TYPE},
+				#{ITEM_SET} 
+				)
+		]]>
+	</insert>
+	
+	<update id="adminItemModify" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				ITEM 
+			SET 
+				ITEM_NAME=#{ITEM_NAME},
+				ITEM_PRICE=#{ITEM_PRICE},
+				ITEM_GENDER=#{ITEM_GENDER},
+				ITEM_TYPE=#{ITEM_TYPE},
+				ITEM_DATE=#{ITEM_DATE},
+				ITEM_SIZE=#{ITEM_SIZE},
+				ITEM_OPTION=#{ITEM_OPTION},
+				ITEM_COLOR=#{ITEM_COLOR},
+				ITEM_SET=#{ITEM_SET} 
+			WHERE 
+				ITEM_NO=#{ITEM_NO}
+		]]>
+	</update>
+	
+	<update id="itemShortPathUpdate" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				ITEM 
+			SET 
+				ITEM_SHORTPATH = #{ITEM_SHORTPATH} 
+			WHERE 
+				ITEM_NO=#{ITEM_NO}
+		]]>
+	</update>
+	
+	<update id="itemImagePathUpdate" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				ITEM 
+			SET 
+				ITEM_IMAGEPATH = #{ITEM_IMAGEPATH} 
+			WHERE 
+				ITEM_NO=#{ITEM_NO}
+		]]>
+	</update>
+	
+	<update id="adminCommentModify" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				KSM_COMMENT 
+			SET 
+				COM_CONTENT = #{COM_CONTENT} 
+			WHERE 
+				COM_NO = #{COM_NO}
+		]]>
+	</update>
+	
+	<delete id="adminItemDelete" parameterType="hashmap">
+		<![CDATA[
+			DELETE 
+			FROM 
+				ITEM 
+			WHERE 
+				ITEM_NO=#{ITEM_NO}
+		]]>
+	</delete>
+	
+	<delete id="adminCommentDelete" parameterType="hashmap">
+		<![CDATA[
+			DELETE 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_NO=#{COM_NO}
+		]]>
+	</delete>
+	
+	<select id="adminCommentList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COM_NO,
+				COM_ORI_NO,
+				COM_NAME,
+				COM_PASSWD,
+				COM_CONTENT,
+				COM_REGDATE,
+				COM_REF,
+				COM_RE_STEP,
+				COM_RE_LEVEL,
+				COM_FILE_ORI_NAME,
+				COM_FILE_SAVE_NAME,
+				COM_CATEGORY 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_CATEGORY = #{COM_CATEGORY} 
+			ORDER BY 
+				COM_REF DESC, COM_RE_STEP DESC
+		]]>
+	</select>
+	
+	<select id="adminCommentSearchList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COM_NO,
+				COM_ORI_NO,
+				COM_NAME,
+				COM_PASSWD,
+				COM_CONTENT,
+				COM_REGDATE,
+				COM_REF,
+				COM_RE_STEP,
+				COM_RE_LEVEL,
+				COM_FILE_ORI_NAME,
+				COM_FILE_SAVE_NAME,
+				COM_CATEGORY 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_CATEGORY = #{COM_CATEGORY} 
+			AND 
+				(
+					COM_NAME LIKE '%${searchStr}%' 
+				OR 
+					COM_CONTENT LIKE '%${searchStr}%' 
+				) 
+			ORDER BY 
+				COM_REF DESC, COM_RE_STEP DESC
+		]]>
+	</select>
+	
+	<select id="adminCommentGetOne" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COM_NO,
+				COM_ORI_NO,
+				COM_NAME,
+				COM_PASSWD,
+				COM_CONTENT,
+				COM_REGDATE,
+				COM_REF,
+				COM_RE_STEP,
+				COM_RE_LEVEL,
+				COM_FILE_ORI_NAME,
+				COM_FILE_SAVE_NAME,
+				COM_CATEGORY 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_NO = #{COM_NO}
+		]]>
+	</select>
+	
+	<insert id="adminCommentWrite" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO 
+				KSM_COMMENT 
+				(
+				COM_NO,
+				COM_ORI_NO,
+				COM_NAME,
+				COM_PASSWD,
+				COM_CONTENT,
+				COM_REGDATE,
+				COM_REF,
+				COM_RE_STEP,
+				COM_RE_LEVEL,
+				COM_FILE_ORI_NAME,
+				COM_FILE_SAVE_NAME,
+				COM_CATEGORY 
+				) 
+			VALUES 
+				(
+				COMMENT_NO_SEQ.NEXTVAL,
+				#{COM_ORI_NO},
+				#{COM_NAME},
+				#{COM_PASSWD},
+				#{COM_CONTENT},
+				SYSDATE,
+				#{COM_REF},
+				#{COM_RE_STEP},
+				#{COM_RE_LEVEL},
+				#{COM_FILE_ORI_NAME},
+				#{COM_FILE_SAVE_NAME},
+				#{COM_CATEGORY}
+				)
+		]]>
+	</insert>
+	
+	<update id="adminCommentIncreaseStep" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				KSM_COMMENT 
+			SET 
+				COM_RE_STEP = COM_RE_STEP + 1 
+			WHERE 
+					COM_REF = #{COM_REF} 
+				AND 
+					COM_RE_STEP >= #{COM_RE_STEP}
+		]]>
+	</update>
+	
+</mapper>

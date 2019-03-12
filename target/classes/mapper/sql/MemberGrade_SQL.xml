@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="grade">
+	<insert id="Coupon_Bronze" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO 
+				COUPON_MEMLIST 
+			(
+				COU_NO,
+				COU_CONTENT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID,
+				COU_STATE,
+				COU_DISCOUNT,
+				COU_ORIGIN_NO
+			) 
+			VALUES 
+			(
+				COUPON_MEMLIST_SEQ.NEXTVAL,
+				'Bronze등급업 쿠폰',
+				sysdate,
+				sysdate+90,
+				#{member_id},
+				'2',
+				'10',
+				'2'
+			)
+		]]>
+	</insert>
+	<insert id="Coupon_Silver" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO 
+				COUPON_MEMLIST 
+			(
+				COU_NO,
+				COU_CONTENT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID,
+				COU_STATE,
+				COU_DISCOUNT,
+				COU_ORIGIN_NO
+			) 
+			VALUES 
+			(
+				COUPON_MEMLIST_SEQ.NEXTVAL,
+				'Silver등급업 쿠폰',
+				sysdate,
+				sysdate+80,
+				#{member_id},
+				'2',
+				'15',
+				'3'
+			)
+		]]>
+	</insert>
+	<insert id="Coupon_Gold" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO 
+				COUPON_MEMLIST 
+			(
+				COU_NO,
+				COU_CONTENT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID,
+				COU_STATE,
+				COU_DISCOUNT,
+				COU_ORIGIN_NO
+			) 
+			VALUES 
+			(
+				COUPON_MEMLIST_SEQ.NEXTVAL,
+				'Gold등급업 쿠폰',
+				sysdate,
+				sysdate+60,
+				#{member_id},
+				'2',
+				'20',
+				'4'
+			)
+		]]>
+	</insert>
+	<insert id="Coupon_Diamond" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO 
+				COUPON_MEMLIST 
+			(
+				COU_NO,
+				COU_CONTENT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID,
+				COU_STATE,
+				COU_DISCOUNT,
+				COU_ORIGIN_NO
+			) 
+			VALUES 
+			(
+				COUPON_MEMLIST_SEQ.NEXTVAL,
+				'Diamond등급업 쿠폰',
+				sysdate,
+				sysdate+50,
+				#{member_id},
+				'2',
+				'25',
+				'5'
+			)
+		]]>
+	</insert>
+	<insert id="Coupon_Kingsman" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO 
+				COUPON_MEMLIST 
+			(
+				COU_NO,
+				COU_CONTENT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID,
+				COU_STATE,
+				COU_DISCOUNT,
+				COU_ORIGIN_NO
+			) 
+			VALUES 
+			(
+				COUPON_MEMLIST_SEQ.NEXTVAL,
+				'Kingsman등급업 쿠폰',
+				sysdate,
+				sysdate+30,
+				#{member_id},
+				'2',
+				'30',
+				'6'
+			)
+		]]>
+	</insert>
+	<select id="Coupon_check" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT
+				COU_ORIGIN_NO
+			FROM
+				COUPON_MEMLIST
+			WHERE
+				MEMBER_ID=#{member_id}
+		]]>
+	</select>
+	<select id="BirthDayCoupon" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT 
+				MEMBER_ID,
+				MEMBER_MONTH,
+				MEMBER_DAY 
+			FROM 
+				KSM_MEMBER
+		]]>
+	</select>
+	<insert id="Coupon_Birth" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO 
+				COUPON_MEMLIST 
+			(
+				COU_NO,
+				COU_CONTENT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID,
+				COU_STATE,
+				COU_DISCOUNT,
+				COU_ORIGIN_NO
+			) 
+			VALUES 
+			(
+				COUPON_MEMLIST_SEQ.NEXTVAL,
+				'생일 기념 쿠폰',
+				sysdate,
+				sysdate+30,
+				#{member_id},
+				'2',
+				'20',
+				'7'
+			)
+		]]>
+	</insert>
+</mapper>

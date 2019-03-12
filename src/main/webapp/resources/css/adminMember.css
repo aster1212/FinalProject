@@ -1,0 +1,131 @@
+@font-face { 
+	font-family: "NotoSansKR-Light"; 
+	src: url('../font/NotoSansKR-Light.otf');
+}
+#adminMemberWrap
+{
+	margin:0 auto;
+	width: 1000px;
+}
+#adminMemberTitle
+{
+	margin-top:100px;
+	text-align:center;
+	font-family: NotoSansKR-Light;
+	font-size: 20px;
+	font-weight:bold;
+}
+#adminmemberList1
+{
+	display:inline-table;
+	width:950px;
+	text-align:center;
+	margin-top: 50px;
+	border-collapse: collapse;
+	font-family: NotoSansKR-Light;
+	font-size: 13px;
+}
+#adminMemberAddr
+{
+	width: 200px;
+}
+thead
+{
+	background-color:silver;
+}
+th, td
+{
+	 text-align: center;
+	 border-bottom: 1px solid silver;
+}
+#adminMemberPaging
+{
+	text-align:center;
+	margin-top:20px;
+}
+#adminMemberSearch
+{
+	text-align:center;
+	margin-top:20px;
+}
+#searchname
+{
+	-webkit-appearance: none;
+	-moz-appearance: none; 
+	appearance: none; 
+	outline:none;
+	background: url('../upload/selectdown.png') no-repeat;
+	background-size: 10px;
+	background-position: right;
+	text-align:center;
+	width: 60px;
+	height: 25px;
+	border: #D5D5D5 1px solid;
+	border-radius: 7px;
+	padding-left:5px;
+}
+#searchtext{
+   width: 150px;
+   height: 25px;
+   padding-right :50px;
+   padding-left : 20px;
+   border-style: none;
+   border: 1px solid #D5D5D5;
+   border-radius: 10px;
+   top: 9px;
+   right: 24.5%;
+   outline: none;
+}
+#ListAdminSearchBtn
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 40px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 10px;
+	color:#FFFFFF;
+}
+#ListAdminSearchBtn:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 40px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 10px;
+	color:#FFFFFF;
+}
+#adminMemberAllDel
+{
+	text-align:center;
+	margin-top:30px;
+}
+#ListAdminSearchBtn1
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 60px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 12px;
+	color:#FFFFFF;
+}
+#ListAdminSearchBtn1:hover
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 60px;
+	height: 25px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 12px;
+	color:#FFFFFF;
+}

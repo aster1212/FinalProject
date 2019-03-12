@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<sql id="orderByRef">
+		 ORDER BY 
+			BOARD_REF DESC, BOARD_RE_STEP DESC
+	</sql>
+	
+	<select id="selectBoardList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				BOARD_NO,
+				BOARD_TITLE,
+				MEMBER_ID,
+				BOARD_CNT,
+				BOARD_REGDATE, 
+				BOARD_SC_STATE,
+				BOARD_REF,
+				BOARD_RE_STEP,
+				BOARD_RE_LEVEL 
+			FROM 
+				KSM_BOARD 
+			WHERE 
+				BOARD_CATEGORY=${status} 
+		]]>
+		<include refid="orderByRef"></include>
+	</select>
+	
+	<select id="selectBoardSearchList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				BOARD_NO,
+				BOARD_TITLE,
+				MEMBER_ID,
+				BOARD_CNT,
+				BOARD_REGDATE, 
+				BOARD_SC_STATE,
+				BOARD_REF,
+				BOARD_RE_STEP,
+				BOARD_RE_LEVEL 
+			FROM 
+				KSM_BOARD 
+			WHERE 
+				BOARD_CATEGORY=${status} 
+			AND 
+				( 
+					BOARD_TITLE LIKE '%${searchStr}%' 
+				OR 
+					BOARD_CONTENT LIKE '%${searchStr}%' 
+				)  
+		]]>
+		<include refid="orderByRef"></include>
+	</select>
+	
+	<select id="selectBoardDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				BOARD_NO,
+				BOARD_TITLE,
+				MEMBER_ID,
+				BOARD_REGDATE,
+				BOARD_CNT,
+				BOARD_CONTENT,
+				BOARD_CATEGORY,
+				BOARD_SC_STATE,
+				BOARD_REF,
+				BOARD_RE_STEP,
+				BOARD_RE_LEVEL 
+			FROM 
+				KSM_BOARD 
+			WHERE 
+				BOARD_NO=#{BOARD_NO} 
+		]]>
+	</select>
+	
+	<update id="updateHitCnt">
+		<![CDATA[
+			UPDATE KSM_BOARD SET 
+				BOARD_CNT=NVL(BOARD_CNT,0)+1 
+			WHERE 
+				BOARD_NO=#{BOARD_NO}
+		]]>
+	</update>
+	
+	<!-- QnA -->
+	
+	<insert id="insertQnA" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO KSM_BOARD 
+				(
+				  BOARD_NO,
+				  BOARD_TITLE,
+				  MEMBER_ID,
+				  BOARD_CONTENT,
+				  BOARD_CATEGORY,
+				  BOARD_REGDATE,
+				  BOARD_CNT,
+				  BOARD_REF,
+					BOARD_RE_STEP,
+					BOARD_RE_LEVEL,
+					BOARD_SC_STATE
+				  
+				) 
+			VALUES 
+				(
+				  BOARD_SEQ.NEXTVAL,
+				  #{BOARD_TITLE},
+				  #{MEMBER_ID},
+				  #{BOARD_CONTENT},
+				  '3',
+				  SYSDATE,
+				  0,
+				  BOARD_SEQ.CURRVAL,
+				  0,0,
+				  #{BOARD_SC_STATE}
+				)
+		]]>
+	</insert>
+	
+	<update id="updateQnA" parameterType="hashmap">
+		<![CDATA[
+			UPDATE KSM_BOARD SET 
+				BOARD_TITLE=#{BOARD_TITLE}, 
+				BOARD_CONTENT=#{BOARD_CONTENT}, 
+				BOARD_SC_STATE=#{BOARD_SC_STATE}
+			WHERE 
+				BOARD_NO=#{BOARD_NO}
+		]]>
+	</update>
+	
+</mapper>

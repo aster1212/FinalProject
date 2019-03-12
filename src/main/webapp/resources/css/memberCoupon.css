@@ -1,0 +1,135 @@
+@font-face { 
+	font-family: "NotoSansKR-Light"; 
+	src: url('../font/NotoSansKR-Light.otf');
+}
+#memCouBoard
+{
+	margin-top: 115px;
+}
+#memCouBoardgb
+{
+	margin-top:20px;
+	font-family : NotoSansKR-Light;
+	font-weight: bold;
+}
+#memCouBoardLine1
+{
+	margin-top: 20px;
+	border-bottom : solid 1px;
+	color: #BDBDBD;
+}
+#couponlogo1:hover
+{
+	content : url('/kingsman/resources/upload/kingsman1.png');
+}
+#useTable
+{
+	display:inline-table;
+	width:800px;
+	text-align:center;
+	margin-top: 20px;
+	border-collapse: collapse;
+	font-family: NotoSansKR-Light;
+	font-size: 14px;
+}
+thead
+{
+	background-color:silver;
+}
+th, td
+{
+	 border-bottom: 1px solid silver;
+     padding: 5px;
+}
+#couponPaging
+{
+	margin-top: 170px;
+	position:relative;
+}
+#couponSearch
+{
+	margin-top: 20px;
+	position:relative;
+}
+#couponBoardBack
+{
+	margin-top: 20px;
+}
+#CouponBoardBtn
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#CouponBoardBtn:hover
+{
+	border: none;
+	outline:none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 80px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#searchInput{
+   width: 150px;
+   height: 25px;
+   padding-right :50px;
+   padding-left : 20px;
+   border-style: none;
+   border: 1px solid #D5D5D5;
+   border-radius: 10px;
+   top: 10px;
+   right: 24.5%;
+   outline: none;
+}
+#searchBtn{
+   width: 20px;
+   height: 20px;
+   display: inline-block;
+   cursor: pointer;
+   line-height: 30px;
+   position: relative;
+   top : 5px;
+   right : 50px;
+   
+}
+#searchBtn2{
+   width: 20px;
+   height: 20px;
+   display: inline-block;
+   cursor: pointer;
+   line-height: 30px;
+   position: absolute;
+   top : 5px;
+   right : 358px;
+}
+#search1
+{
+	-webkit-appearance: none;
+	-moz-appearance: none; 
+	appearance: none; 
+	outline:none;
+	background: url('../upload/selectdown.png') no-repeat;
+	background-size: 20px;
+	background-position: right;
+	text-align:center;
+	width: 70px;
+	height: 20px;
+	border: #D5D5D5 1px solid;
+	border-radius: 7px;
+	padding-right
+}

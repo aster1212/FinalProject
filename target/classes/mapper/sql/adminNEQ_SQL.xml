@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminNEQ">
+	
+	<insert id="insertNEBoard" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO KSM_BOARD 
+				(
+				  BOARD_NO,
+				  BOARD_TITLE,
+				  MEMBER_ID,
+				  BOARD_CONTENT,
+				  BOARD_CATEGORY,
+				  BOARD_REGDATE,
+				  BOARD_CNT,
+				  BOARD_REF,
+					BOARD_RE_STEP,
+					BOARD_RE_LEVEL
+				  
+				) 
+			VALUES 
+				(
+				  BOARD_SEQ.NEXTVAL,
+				  #{BOARD_TITLE},
+				  #{MEMBER_ID},
+				  #{BOARD_CONTENT},
+				  #{BOARD_CATEGORY},
+				  SYSDATE,
+				  0,
+				  BOARD_SEQ.CURRVAL,
+				  0,0
+				)
+		]]>
+	</insert>
+	
+	<insert id="insertQnAReply" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO KSM_BOARD 
+				(
+				  BOARD_NO,
+				  BOARD_TITLE,
+				  MEMBER_ID,
+				  BOARD_CONTENT,
+				  BOARD_CATEGORY,
+				  BOARD_REGDATE,
+				  BOARD_CNT,
+				  BOARD_REF,
+					BOARD_RE_STEP,
+					BOARD_RE_LEVEL
+				  
+				) 
+			VALUES 
+				(
+				  BOARD_SEQ.NEXTVAL,
+				  #{BOARD_TITLE},
+				  #{MEMBER_ID},
+				  #{BOARD_CONTENT},
+				  3,
+				  SYSDATE,
+				  0,
+				  #{BOARD_REF},
+				  #{BOARD_RE_STEP},
+				  #{BOARD_RE_LEVEL} 
+				)
+		]]>
+	</insert>
+	
+	<update id="updateNEBoard" parameterType="hashmap">
+		<![CDATA[
+			UPDATE KSM_BOARD SET 
+				BOARD_TITLE=#{BOARD_TITLE}, 
+				BOARD_CONTENT=#{BOARD_CONTENT} 
+			WHERE 
+				BOARD_NO=#{BOARD_NO}
+		]]>
+	</update>
+	
+	<update id="updateQnABoardReStep" parameterType="hashmap">
+		<![CDATA[
+		
+			UPDATE KSM_BOARD SET 
+				BOARD_RE_STEP = BOARD_RE_STEP+1 
+			WHERE 
+				BOARD_REF = #{BOARD_REF} AND BOARD_RE_STEP >= #{BOARD_RE_STEP}
+		]]>
+		
+	</update>
+	
+	<delete id="deleteNEBoard" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM 
+				KSM_BOARD 
+			WHERE 
+				BOARD_NO=#{BOARD_NO} 
+		]]>
+	</delete>
+	
+	<delete id="deleteQnaBoardTails" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM 
+				KSM_BOARD 
+			WHERE 
+				BOARD_REF=#{BOARD_REF} AND BOARD_RE_STEP < #{BOARD_RE_STEP} AND BOARD_RE_LEVEL > #{BOARD_RE_LEVEL}
+		]]>
+	</delete>
+	
+</mapper>

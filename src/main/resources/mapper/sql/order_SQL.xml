@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+
+
+	<!-- OrderList에 Insert -->
+	<insert id="insertOrder" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO ORDERLIST 
+		(
+			ORDER_NO,
+			ORDER_DATE,
+			MEMBER_ID,
+			ORDER_ADDR,
+			ORDER_PHONE,
+			ORDER_NAME,
+			ORDER_STATE,
+			ORDER_PAYMENT,
+			ORDER_EMAIL,
+			ORDER_TOTALPAYMENT
+		)
+		VALUES 
+		(
+			ORDERLIST_NO_SEQ.NEXTVAL,
+			SYSDATE,
+			#{MEMBER_ID},
+			#{ORDER_ADDR},
+			#{ORDER_PHONE},
+			#{ORDER_NAME},
+			#{ORDER_STATE},
+			1,
+			#{ORDER_EMAIL},
+			#{ORDER_TOTALPAYMENT}
+		)
+	]]>
+	</insert>
+	
+	
+	<!-- 방금쓴글 조회 -->
+	<select id="selectOrderNo" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				ORDERLIST_NO_SEQ.CURRVAL AS ORDER_NO 
+			FROM 
+				DUAL 	
+		]]>
+	</select>
+	
+		<!-- 사용가능 쿠폰 조회 -->
+	<select id="selectCoupon" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			select 
+				COU_NO,
+				COU_CONTENT,
+				COU_SDATE,
+				COU_EDATE,
+				MEMBER_ID,
+				COU_USEDATE,
+				COU_STATE,
+				COU_DISCOUNT,
+				COU_ORIGIN_NO
+
+			FROM
+				COUPON_MEMLIST
+
+			WHERE
+				 MEMBER_ID = #{MEMBER_ID}
+			AND
+				COU_STATE = 2
+	
+		]]>
+	</select>
+	
+	
+	<!-- OrderDetail에 insert -->
+	<insert id="insertOrderDetail" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO ORDERDETAIL 
+		(
+			ORDER_NO,
+			ORDERITEM_NAME,
+			ORDERITEM_COUNT,
+			ORDERITEM_SIZE,
+			ORDERITEM_COLOR,
+			ORDERITEM_PRICE,
+			ORDERITEM_STATE,
+			ORDERITEM_DATE,
+			ORDERITEM_OPTION,
+			ITEM_NO
+		)
+		VALUES 
+		(
+			#{ORDER_NO},
+			#{ORDERITEM_NAME},
+			#{ORDERITEM_COUNT},
+			#{ORDERITEM_SIZE},
+			#{ORDERITEM_COLOR},
+			#{ORDERITEM_PRICE},
+			#{ORDERITEM_STATE},
+			sysdate,
+			#{ORDERITEM_OPTION},
+			#{ITEM_NO}
+		)
+	]]>
+	</insert>
+	
+	<select id="orderDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				ORDER_NO,
+       	     	ORDER_ADDR,
+       	     	MEMBER_ID,
+       	     	ORDER_PHONE,
+       	     	ORDER_NAME,
+       	     	TO_CHAR(ORDER_DATE, 'YYYY.MM.DD') AS ORDER_DATE,
+       	     	ORDER_STATE,
+       	     	ORDER_PAYMENT,
+       	     	ORDER_EXCHANGE,
+       	     	ORDER_TOTALPAYMENT 
+			FROM
+				ORDERLIST
+			WHERE
+				ORDER_NO = #{ORDER_NO}		
+		]]>
+	</select>
+	
+		<!-- 주문상세보기2 : orderDetail정보 불러오기 -->
+	<select id="orderDetail2" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				ORDER_NO,
+       	     	ORDERITEM_NAME,
+       	     	ORDERITEM_COUNT,
+       	     	ORDERITEM_SIZE,
+       	     	ORDERITEM_COLOR,
+       	     	ORDERITEM_PRICE,
+       	     	ORDERITEM_STATE,
+       	     	ORDERITEM_OPTION,
+       	     	ITEM_NO
+			FROM
+				ORDERDETAIL
+			WHERE
+				ORDER_NO = #{ORDER_NO}		
+		]]>
+	</select>
+	
+	<update id="exchange" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				ORDERLIST
+			SET
+				ORDER_STATE = #{ORDER_STATE},
+				ORDER_EXCHANGE = #{ORDER_EXCHANGE}					
+			WHERE
+				ORDER_NO = #{ORDER_NO}	
+		]]>
+	</update>
+
+	
+	
+	<update id="refund" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				ORDERLIST
+			SET
+				ORDER_STATE = #{ORDER_STATE}				
+			WHERE
+				ORDER_NO = #{ORDER_NO}	
+		]]>
+	</update>
+	
+		
+	<update id="updateDetail" parameterType="hashmap">
+		<![CDATA[
+			UPDATE 
+				ORDERDETAIL
+			SET 
+				ORDERITEM_STATE = #{ORDER_STATE}				
+			WHERE 
+				ORDER_NO = #{ORDER_NO}	
+		]]>
+	</update>
+
+	
+</mapper>

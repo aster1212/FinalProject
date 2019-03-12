@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wish">
+
+<insert id="insertWishlist" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO WISHLIST 
+				( 
+					MEMBER_ID,
+					ITEM_NO,
+					WISH_NO
+			 	)
+			 VALUES 
+			 	(
+			 	    #{MEMBER_ID},
+			 	    #{ITEM_NO},
+					WISHLIST_NO_SEQ.NEXTVAL
+				)
+		]]>
+	</insert>
+	
+	<select id="selectWishlist" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+        		WISH_NO,
+       			ITEM_NO,
+			 	MEMBER_ID,
+			 	ITEM_SIZE,
+			 	ITEM_COLOR,
+			 	ITEM_PRICE,
+			 	ITEM_NAME,
+			 	ITEM_SHORTPATH 
+			FROM
+				(
+				SELECT 
+					b.WISH_NO,
+					a.ITEM_NO,
+					b.MEMBER_ID,
+					a.ITEM_SIZE,
+					a.ITEM_COLOR,
+					a.ITEM_PRICE,
+					a.ITEM_NAME,	
+        			a.ITEM_SHORTPATH
+			 	FROM
+			    	ITEM a, WISHLIST b
+				WHERE
+					a.ITEM_NO = b.ITEM_NO AND
+					b.MEMBER_ID = #{MEMBER_ID}
+			  	ORDER BY
+			    	WISH_NO DESC
+			    )	    	
+		]]>
+	</select>
+	
+	
+	
+		<select id="selectWishlist2" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				MEMBER_ID,
+				ITEM_NO
+				
+			FROM
+				 WISHLIST
+			WHERE
+				 MEMBER_ID = #{MEMBER_ID}
+			
+				
+				
+			
+   	
+		]]>
+	</select>
+	
+	<delete id="deleteOneWishlist" parameterType="hashmap">
+		<![CDATA[
+			DELETE 
+				FROM WISHLIST
+			WHERE 
+				WISH_NO = ${WISH_NO}
+		]]>
+	</delete>
+	
+	<delete id="deleteAllWishlist" parameterType="hashmap">
+		<![CDATA[
+			DELETE 
+				FROM WISHLIST
+			WHERE 
+				MEMBER_ID = #{MEMBER_ID}
+		]]>
+	</delete>
+	
+	
+<!-- 	<select id="selectWish" parameterType="hashmap" resultType="hashmap">
+	
+	<![CDATA[
+	SELECT * WISHLIST
+	
+	WHERE
+	MEMBER_ID = #{MEMBER_ID} AND
+	WISH_NO IN
+	]]>
+	<foreach collection="wish_no" item="item" index="index" separator="," open="(" close=")">
+		#{item}
+	</foreach>
+	
+	</select> -->
+	
+	
+	
+</mapper>

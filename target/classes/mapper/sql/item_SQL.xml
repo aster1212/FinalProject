@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="item">
+
+	<!-- 상품목록 조회 -->
+	<select id="selectItemManList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		select 
+			item_no, item_name, item_shortpath, item_price 
+		from 
+			item 
+		where 
+			ITEM_GENDER='M'
+		order by 
+			ITEM_REGDATE DESC
+			]]>
+	</select>
+	<select id="selectItemWomanList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, ITEM_NAME, ITEM_SHORTPATH, ITEM_PRICE 
+		FROM  
+			ITEM  
+		WHERE 
+			ITEM_GENDER='W' 
+		ORDER BY 
+			ITEM_REGDATE DESC 
+			]]>
+	</select>
+	<select id="selectShoesList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_TYPE='JS' 
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	<select id="selectShoesManList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_TYPE='JS' AND ITEM_GENDER='M' 
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	<select id="selectShoesWomanList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_TYPE='JS'  AND ITEM_GENDER='W' 
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	
+	<select id="selectAccList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_TYPE='AC' 
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	
+	
+	<select id="selectManUpList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_GENDER='M' AND ITEM_TYPE='JU' 
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	<select id="selectManDownList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_GENDER='M' AND ITEM_TYPE='JD' 
+		ORDER BY 
+		ITEM_REGDATE DESC
+	]]>
+	</select>
+	<select id="selectManMidList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_GENDER='M' AND ITEM_TYPE='JI' 
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	
+	<select id="selectWomanUpList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_GENDER='W' AND ITEM_TYPE='JU' 
+		ORDER BY 
+		ITEM_REGDATE DESC
+	]]>
+	</select>
+	<select id="selectWomanDownList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_GENDER='W' AND ITEM_TYPE='JD' 
+		ORDER BY 
+		ITEM_REGDATE DESC
+	]]>
+	</select>
+	<select id="selectWomanMidList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_GENDER='W' AND ITEM_TYPE='JI' 
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	
+	<!-- 상품조회 -->
+	<select id="selectItemDetail" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, ITEM_NAME, ITEM_DATE, ITEM_SIZE, ITEM_OPTION, ITEM_COLOR, ITEM_SHORTPATH, ITEM_IMAGEPATH, ITEM_PRICE, ITEM_STOCK   
+		FROM 
+			ITEM 
+		WHERE  
+			ITEM_NO = #{ITEM_NO}
+			]]>
+			
+	</select>
+	
+	<select id="selectQnaList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COM_NO, 
+				COM_NAME, 
+				COM_CONTENT, 
+				COM_REGDATE 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_ORI_NO = #{ITEM_NO} AND COM_CATEGORY='1'  
+			ORDER BY 
+				COM_REGDATE 
+		]]>
+	</select>
+	<select id="selectQnaDetail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COM_NO, 
+				COM_NAME, 
+				COM_CONTENT, 
+				COM_REGDATE, 
+				COM_PASSWD 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_NO=#{COM_NO} 
+		]]>
+	</select>
+	<select id="selectCommentList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COM_NO, 
+				COM_NAME, 
+				COM_CONTENT, 
+				COM_REGDATE 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_ORI_NO = #{ITEM_NO} AND COM_CATEGORY='2' 
+			ORDER BY 
+				COM_REGDATE 
+		]]>
+	</select>
+	<select id="selectPhotoCommentList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COM_NO, 
+				COM_NAME, 
+				COM_CONTENT, 
+				COM_REGDATE,
+				COM_FILE_SAVE_NAME 
+			FROM 
+				KSM_COMMENT 
+			WHERE 
+				COM_ORI_NO = #{ITEM_NO} AND COM_CATEGORY='3' 
+			ORDER BY 
+				COM_REGDATE 
+		]]>
+	</select>
+	 <insert id="itemQnaWrite" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO KSM_COMMENT ( 
+			COM_NO, 
+			COM_ORI_NO, 
+			COM_NAME, 
+			COM_PASSWD, 
+			COM_CONTENT, 
+			COM_REGDATE, 
+			COM_CATEGORY, 
+			COM_REF, 
+			COM_FILE_ORI_NAME, 
+			COM_FILE_SAVE_NAME 
+			) VALUES ( 
+			COMMENT_NO_SEQ.NEXTVAL, 
+			#{ITEM_NO}, 
+			#{COM_NAME}, 
+			#{COM_PASSWD}, 
+			#{COM_CONTENT}, 
+			SYSDATE, 
+			'1' , 
+			COMMENT_NO_SEQ.CURRVAL, 
+			'NONE', 
+			'NONE'
+			)
+		]]>
+	</insert>
+	<insert id="itemCommentWrite" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO KSM_COMMENT ( 
+			COM_NO, 
+			COM_ORI_NO, 
+			COM_NAME, 
+			COM_PASSWD, 
+			COM_CONTENT, 
+			COM_REGDATE, 
+			COM_CATEGORY, 
+			COM_REF, 
+			COM_FILE_ORI_NAME, 
+			COM_FILE_SAVE_NAME  
+			) VALUES ( 
+			COMMENT_NO_SEQ.NEXTVAL, 
+			#{ITEM_NO}, 
+			#{COM_NAME}, 
+			#{COM_PASSWD}, 
+			#{COM_CONTENT}, 
+			SYSDATE, 
+			'2' , 
+			COMMENT_NO_SEQ.CURRVAL, 
+			'NONE', 
+			'NONE'
+			)
+		]]>
+	</insert>
+	<insert id="itemPhotoCommentWrite" parameterType="hashmap">
+		<![CDATA[
+		 	INSERT INTO KSM_COMMENT ( 
+			COM_NO, 
+			COM_ORI_NO, 
+			COM_NAME, 
+			COM_PASSWD, 
+			COM_CONTENT, 
+			COM_REGDATE, 
+			COM_CATEGORY, 
+			COM_REF, 
+			COM_FILE_ORI_NAME, 
+			COM_FILE_SAVE_NAME  
+			) VALUES ( 
+			COMMENT_NO_SEQ.NEXTVAL, 
+			#{ITEM_NO}, 
+			#{COM_NAME}, 
+			#{COM_PASSWD}, 
+			#{COM_CONTENT}, 
+			SYSDATE, 
+			'3' , 
+			COMMENT_NO_SEQ.CURRVAL, 
+			#{COM_FILE_ORI_NAME}, 
+			#{COM_FILE_SAVE_NAME}
+			)
+		]]>
+	</insert>
+ 	<update id="updateQna" parameterType="hashmap">
+		<![CDATA[
+         UPDATE 
+            KSM_COMMENT 
+         SET 
+            COM_CONTENT=#{COM_CONTENT} 
+         WHERE 
+            COM_NO=#{COM_NO}
+      ]]>
+   </update>
+   <select id="selectCommentPasswd" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+         SELECT 
+            COM_PASSWD 
+         FROM 
+            KSM_COMMENT 
+         WHERE 
+            COM_NO=#{COM_NO}
+      ]]>
+   </select>
+
+	
+	<!-- 옵션 조회 -->
+	<select id="selectItemOption" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_SIZE, ITEM_OPTION 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_NO=#{ITEM_NO} 
+	]]>
+	</select>
+	<delete id="deleteCommentDelete" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM KSM_COMMENT WHERE COM_NO=#{COM_NO} AND COM_CATEGORY='2' 
+		]]>
+	</delete> 
+	 <delete id="deletePhotoDelete" parameterType="hashmap">
+	<![CDATA[
+		DELETE FROM KSM_COMMENT  
+		WHERE 
+		 COM_NO=#{COM_NO} AND COM_CATEGORY='3' 
+	]]>
+	</delete> 
+	<select id="selectSearchItemList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE 
+			ITEM_GENDER=#{item_gender} AND ITEM_TYPE=#{item_type} 
+		And
+      		ITEM_PRICE>=#{item_price1} and ITEM_PRICE<=#{item_price2}
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+	<select id="selectSearchCombineList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			ITEM_NO, 
+			ITEM_NAME, 
+			ITEM_SHORTPATH, 
+			ITEM_PRICE 
+		FROM 
+			ITEM 
+		WHERE
+       		item_name like '%${item_combine}%' or item_price like '%${item_combine}%'
+		ORDER BY 
+			ITEM_REGDATE DESC
+	]]>
+	</select>
+ </mapper>

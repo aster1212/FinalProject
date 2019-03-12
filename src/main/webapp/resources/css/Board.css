@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+#boardContent{
+	text-align: left;
+	padding: 0 10%;
+}
+#boardListTitle{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	display: inline-block;
+	background: #dbf6ec;
+	padding : 0 0 0 30px;
+	text-align: left;
+	font-size:32px;
+}
+.boardList{
+	width: 100%;
+	height : 60px;
+	display: inline-block;
+	border-bottom: 1px solid #dbdbdb;
+	text-align: left;
+	padding : 0 0 0 30px;
+	font-size: 18px;
+	cursor: pointer;
+}
+.boardListLeft{
+	display: inline-block;
+	text-align:left;
+	width: 40%;
+	margin-top:17px;
+}
+.boardListRight{
+	display: inline-block;
+	text-align: right;
+	width: 50%;
+	margin-top:17px;
+}
+.viewDiv{
+	display: inline-block;
+	margin:0 auto;
+}
+.viewCountDiv{
+	display: inline-block;
+	color: #555555;
+	width : 30px;
+}
+.dateDiv{
+	display: inline-block;
+	color: #aaaaaa;
+}
+.boardBtn{
+}
+.pointer{
+	cursor: pointer;
+}
+.pagingView{
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+#boardWriteBtn{
+	background:white;
+	width: 60px;
+	height: 30px;
+	position:absolute;
+	border-style: none;
+	border: 2px solid #50DEAA;
+	border-radius: 12px;
+	top: 203px;
+	right: 21%;
+	outline: none;
+	z-index: 3;
+}
+.replyImg{
+	width: 18px;
+	height: 18px;
+}
+.canMove{
+	cursor: pointer;
+}
+
+
+/* detail */
+#detailContent{
+	
+	width : 100%;
+	min-height: 620px;
+	padding: 30px 0 0 30px;
+}
+.boardLine{
+	width: 100%;
+	height: 40px;
+	padding: 0 15px;
+	border-bottom: 1px solid #aaaaaa;
+}
+#detailBoardWriteBtn{
+	background:white;
+	width: 60px;
+	height: 30px;
+	border-style: none;
+	border: 2px solid #50DEAA;
+	border-radius: 12px;
+	float: right;
+	margin: 10px 10px 0 0;
+	outline: none;
+	z-index: 3;
+}
+
+.detailOption{
+	background:white;
+	width: 60px;
+	height: 30px;
+	border-style: none;
+	border: 2px solid #50DEAA;
+	border-radius: 12px;
+	margin: 0 0 0 5px;
+	outline: none;
+}
+
+#modiOption{
+	margin: 0 0 0 80%;
+}
+
+#qnaContentBox{
+	width : 100%;
+	padding : 0 0 0 30px;
+	
+}
+.qnaContentLineBox{
+	width : inherit;
+	height: 30px;
+	line-height: 30px;
+	font-size : 18px;
+}
+
+#qnaTextareaBox{
+	height: 460px;
+}
+.qnaContentLineLeft{
+	width : 20%;
+}
+.qnaContentRight{
+	width : 60%;
+}
+.qnaInline{
+	display: inline-block;
+}
+.qnaText{
+	width : 100%;
+	height : 100%;
+	padding : 0 5px;
+	font-size : 15px;
+	border: none;
+	border-bottom: 1px solid #999999;
+	outline: none;
+}
+.qnaTextArea{
+	width: 90%;
+	height: 80%;
+	border-radius:10px;
+	padding : 20px;
+	font-size : 16px;
+	outline: none;
+}
+#qnaOptionBox{
+	width: 100%;
+	text-align: center;
+}
+
+/* qna reply */
+#qnareplyTitle{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	display: inline-block;
+	background: #dbf6ec;
+	padding : 0 0 0 30px;
+	font-size:32px;
+	text-align: center;
+}
+#replyForm{
+	text-align: right;	
+}
+#hideDivForReply{
+	display: none;
+}

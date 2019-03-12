@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   <context:component-scan base-package="ksm" use-default-filters="true">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+   <aop:aspectj-autoproxy proxy-target-class="true"/>
+   
+   <mvc:annotation-driven>
+      <mvc:argument-resolvers>
+         <bean class="ksm.common.resolver.CustomMapArgumentResolver"></bean>      
+      </mvc:argument-resolvers>
+   </mvc:annotation-driven>
+   
+   <!--   여기부터 인터셉터 -->
+   <mvc:interceptors>
+   
+   				<!-- 중복 로그인 방지 -->
+      <mvc:interceptor>
+         <mvc:mapping path="/member/login"/>
+         <bean id="loggerInterceptor" class="ksm.common.logger.LoggerInterceptor"></bean>
+      </mvc:interceptor> 
+      
+      			<!-- 관리자 -->
+      <mvc:interceptor>
+         <mvc:mapping path="/admin/**"/>
+         <bean id="adminInterceptor" class="ksm.common.logger.adminInterceptor"></bean>
+      </mvc:interceptor>
+      
+      			<!-- 비회원/손님 -->
+      <mvc:interceptor>
+         <mvc:mapping path="/member/memModifyForm"/>
+         <mvc:mapping path="/member/memModify"/>
+         <mvc:mapping path="/member/memDelete"/>
+         <mvc:mapping path="/member/mypage"/>
+         <mvc:mapping path="/member/memcouponlist"/>
+         <mvc:mapping path="/wishList/list"/>  
+         <mvc:mapping path="/item/addWish"/>  
+         <mvc:mapping path="/item/subWish"/>    
+         <bean id="nonMemberInterceptor" class="ksm.common.logger.nonMemberInterceptor"></bean>
+      </mvc:interceptor>
+      
+   </mvc:interceptors> 
+   
+   <!-- 
+   <mvc:interceptors>
+      <mvc:interceptor>
+         <mvc:mapping path="/**"/>
+         <bean id="loggerInterceptor" class="ksm.common.logger.LoggerInterceptor"></bean>
+      </mvc:interceptor>
+   </mvc:interceptors>
+    -->
+   <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+   <mvc:resources mapping="/resources/**" location="/resources/" />
+   
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1" />
+    
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+    
+    <bean
+       class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="2" 
+       p:viewClass="org.springframework.web.servlet.view.JstlView" 
+       p:prefix="/WEB-INF/jsp/" p:suffix=".jsp">
+      </bean>
+      
+      <!-- tiles setting -->
+         <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+        <property name="order" value="0" />
+    </bean>
+     
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles-def.xml</value>
+            </list>
+        </property>
+    </bean>
+    
+   
+</beans>

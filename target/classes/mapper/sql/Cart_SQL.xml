@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cart">
+
+<insert id="insertCartlist" parameterType="hashmap">
+      <![CDATA[
+         INSERT INTO CART
+            ( 
+               CART_NO,
+               MEMBER_ID,
+               ITEM_NO,
+               ITEM_PRICE,
+               ITEM_COUNT,
+               CART_OPTION,
+               ITEM_OPTION,
+               ITEM_SIZE,
+               ITEM_COLOR
+             )
+          VALUES 
+             (   
+                CART_NO_SEQ.NEXTVAL,
+                 #{MEMBER_ID},
+                 #{ITEM_NO},
+                 #{ITEM_PRICE},
+               #{ITEM_COUNT},
+               #{CART_OPTION},
+               #{ITEM_OPTION},
+               #{ITEM_SIZE},
+               #{ITEM_COLOR}
+            )
+      ]]>
+   </insert>
+	
+	<!-- 02.13 수정된 부분 -->
+	<select id="selectCartlist" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				ITEM_NO,
+        		ITEM_NAME,
+       			ITEM_SIZE,
+       			ITEM_SHORTPATH,
+       			ITEM_OPTION,
+       			ITEM_COLOR,
+       			ITEM_PRICE,
+       			CART_NO,
+       			ITEM_COUNT,
+       			CART_OPTION,
+       			MEMBER_ID
+			FROM
+				(
+				SELECT 
+					a.ITEM_NO,
+					a.ITEM_NAME,
+					b.ITEM_SIZE,
+					a.ITEM_SHORTPATH,
+					b.ITEM_OPTION,	
+        			b.ITEM_COLOR,
+        			a.ITEM_PRICE,
+        			b.CART_NO,
+        			b.ITEM_COUNT,
+        			b.CART_OPTION,
+        			b.MEMBER_ID					
+			 	FROM								
+			    	ITEM a, CART b
+				WHERE
+					a.ITEM_NO = b.ITEM_NO  AND							
+					b.MEMBER_ID = #{MEMBER_ID}
+			    )	    	
+		]]>					
+	</select>					
+						
+						
+	
+	<delete id="deleteOneCartlist" parameterType="hashmap">
+		<![CDATA[
+			DELETE 
+				FROM CART
+			WHERE 
+				CART_NO = ${CART_NO}
+		]]>
+	</delete>
+	
+	<delete id="deleteAllCartlist" parameterType="hashmap">
+		<![CDATA[
+			DELETE 
+				FROM CART
+			WHERE 
+				MEMBER_ID = #{MEMBER_ID}
+		]]>
+	</delete>
+	
+	
+	<delete id="deleteSelectCartlist" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM 
+				CART 
+			WHERE 
+			MEMBER_ID=#{MEMBER_ID} AND 
+			CART_NO IN ]]>	
+			<foreach collection="cart_No" item="item" index="index" separator="," open="(" close=")" >
+	      						#{item}
+	      	</foreach>
+		
+	</delete>				
+	
+	
+	
+	<!-- 장바구니 수량 수정 (비회원은 SESSION값 REMOVE 후 다시 PUT) -->
+	<update id="updateCountUp" parameterType="hashmap">
+		<![CDATA[
+			UPDATE CART 
+			SET 
+				ITEM_COUNT=ITEM_COUNT+1
+			WHERE 
+				CART_NO		=#{CART_NO} 	AND
+				MEMBER_ID	=#{MEMBER_ID}
+		]]>
+	</update>
+	<!-- 장바구니 수량 수정 (비회원은 SESSION값 REMOVE 후 다시 PUT) -->
+	<update id="updateCountDown" parameterType="hashmap">
+		<![CDATA[
+			UPDATE CART 
+			SET 
+				ITEM_COUNT=ITEM_COUNT-1
+			WHERE 
+				CART_NO		=#{CART_NO} 	AND
+				MEMBER_ID	=#{MEMBER_ID}
+		]]>
+	</update>
+	
+	<!-- 장바구니 수량 수정 (비회원은 SESSION값 REMOVE 후 다시 PUT) -->
+	<update id="updateCountChange" parameterType="hashmap">
+		<![CDATA[
+			UPDATE CART 
+			SET 
+				ITEM_COUNT=${ITEM_COUNT}
+			WHERE 
+				CART_NO		=#{CART_NO} 	AND
+				MEMBER_ID	=#{MEMBER_ID}
+		]]>
+	</update>
+	
+	<!-- 체크박스에 선택된 카트리스트 불러오기 -->
+	
+	<select id="selectCheckedCartList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				ITEM_NO,
+        		ITEM_NAME,
+       			ITEM_SIZE,
+       			ITEM_SHORTPATH,
+       			ITEM_OPTION,
+       			ITEM_COLOR,
+       			ITEM_PRICE,
+       			CART_NO,
+       			ITEM_COUNT,
+       			CART_OPTION,
+       			MEMBER_ID
+			FROM
+				(
+				SELECT 
+					a.ITEM_NO,
+					a.ITEM_NAME,
+					b.ITEM_SIZE,
+					a.ITEM_SHORTPATH,
+					b.ITEM_OPTION,	
+        			b.ITEM_COLOR,
+        			a.ITEM_PRICE,
+        			b.CART_NO,
+        			b.ITEM_COUNT,
+        			b.CART_OPTION,
+        			b.MEMBER_ID					
+			 	FROM								
+			    	ITEM a, CART b
+				WHERE
+					a.ITEM_NO = b.ITEM_NO  AND							
+					b.MEMBER_ID = #{MEMBER_ID}
+					and
+					CART_NO = #{CART_NO}
+			    )	 
+		]]>
+	</select>
+
+		<delete id="deleteCartlistByNo" parameterType="hashmap">
+		<![CDATA[
+			DELETE 
+				FROM CART
+			WHERE 
+				MEMBER_ID = #{MEMBER_ID}
+			AND
+				CART_NO = #{CART_NO}
+		]]>
+	</delete>
+	
+	
+</mapper>

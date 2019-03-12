@@ -1,0 +1,161 @@
+@charset "UTF-8";
+
+.mainItems{
+	display: inline-block;
+	width: 20%;
+	height: 42%;
+	overflow: hidden;
+	text-align: center;
+	border: 1px solid white;
+}
+
+.itemTumbnailBox{
+	display: inline-block;
+	width: 100%;
+	height: 70%;
+	margin: 1% 0 0 0 ;
+	
+}
+
+.itemThumbnails{
+	display: inline-block;
+	width: 98%;
+	height: 100%;
+	border : 2px solid #ffffff;
+}
+
+.itemAccounts{
+	text-align: left;
+	margin-left: 2%;
+}
+
+.money{
+	font-weight: bold;
+}
+
+.imgWhiteContentBlank{
+	width : 100%;
+	height: 50px;
+	display: block;
+}
+
+
+#img1Content{
+	z-index: -1;
+	display : inline-block;
+}
+
+#imgBlank1{
+	width: 100%;
+	height: 120%;
+	position: absolute;
+	top:100%;
+	left:0%;
+	z-index: -1;
+}
+
+#imgBlank2{
+	width: 100%;
+	height: 120%;
+	position: absolute;
+	top:320%;
+	left:0%;
+	z-index: -1;
+}
+
+#imgBlank3{
+	width: 100%;
+	height: 120%;
+	position: absolute;
+	top:540%;
+	left:0px;
+	z-index: -1;
+}
+
+.backWite{
+	background: #ffffff;
+}
+.absolte{
+	position: absolute;
+}
+#mainImg1{
+	width: 100%;
+	height:100%;
+	position: fixed;
+	top:20px;
+	left:0px;
+	z-index: -2;
+}
+#mainImg2{
+	width: 100%;
+	position: fixed;
+	top:-400px;
+	left:0px;
+	z-index: -3;
+}
+#mainImg3{
+	width: 100%;
+	position: fixed;
+	top:20px;
+	left:0px;
+	z-index: -3;
+}
+#mainImg4{
+	width: 100%;
+	height:100%;
+	position: fixed;
+	top:20px;
+	left:0px;
+	z-index: -3;
+	
+	background: white;
+}
+
+.imgLogo{
+	position: absolute;
+	color: #4BD1A0;
+	left : 0%;
+	font-size: 700%;
+	word-spacing: 10px;
+	letter-spacing: 10px;
+	line-height: 100%;
+	margin-top: 20%;
+	opacity: 0;
+}
+
+#img1Logo{
+	left:5%;
+	opacity: 1;
+}
+#img2Logo{
+	left:5%;
+	opacity: 1;
+	
+}
+#img3Logo{
+	left:5%;
+	opacity: 1;
+	
+}
+
+#mainEventList{
+	width: 70%;
+	margin: 0 15%;
+	height: 500px;
+	text-align: left;
+}
+
+#moreBtn{
+	background:white;
+	width: 60px;
+	height: 30px;
+	border-style: none;
+	border: 2px solid #50DEAA;
+	border-radius: 12px;
+	float: right;
+	margin: 10px 10px 0 0;
+	outline: none;
+	z-index: 3;
+	
+	cursor: pointer;
+}

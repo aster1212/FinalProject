@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	<!-- 중복확인 체크 -->
+	<select id="selectMemberID" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT
+				COUNT(member_id) AS RESULT
+			FROM
+				KSM_MEMBER
+			WHERE
+				member_id = #{member_id}
+		]]>
+	</select>
+	
+	<!-- 회원가입  -->
+	<insert id="insertMemberJoin" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO KSM_MEMBER
+				(
+					member_no,
+					member_id,
+					member_passwd,
+					member_name,
+					member_year,
+					member_month,
+					member_day,
+					member_gender,
+					member_phone,
+					member_email,
+					member_zipcode,
+					member_addr1,
+					member_addr2,
+					member_addr3,
+					member_regdate,
+					member_del_gb,
+					member_mem_gb
+				)
+			VALUES
+				(
+					ksm_member_no_seq.NEXTVAL,
+					#{member_id}, 
+					#{member_passwd}, 
+					#{member_name}, 
+					#{member_year},
+					#{member_month},
+					#{member_day}, 
+					#{member_gender}, 
+					#{member_phone}, 
+					#{member_email}, 
+					#{member_zipcode}, 
+					#{member_addr1}, 
+					#{member_addr2}, 
+					#{member_addr3}, 
+					SYSDATE, 
+					'N',
+					'0'
+				)
+				
+		]]>
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="selectMemberInfo" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT
+				MEMBER_ID, 
+				MEMBER_PASSWD, 
+				MEMBER_NAME,
+				MEMBER_YEAR,
+				MEMBER_MONTH,
+				MEMBER_DAY,
+				MEMBER_TOTAL,
+				MEMBER_MILEAGE,
+				MEMBER_MEM_GB,
+				MEMBER_PHONE,
+				MEMBER_ZIPCODE,
+				MEMBER_ADDR1,
+				MEMBER_ADDR2,
+				MEMBER_ADDR3
+			FROM 
+				KSM_MEMBER 
+			WHERE 
+				MEMBER_ID = #{member_id}
+			AND
+				MEMBER_PASSWD = #{member_passwd}
+			AND
+				MEMBER_DEL_GB = 'N'
+		]]>
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="selectFindId" parameterType="HashMap" resultType="String">
+		<![CDATA[
+			SELECT
+				MEMBER_ID
+			FROM
+				KSM_MEMBER
+			WHERE
+				member_year = #{member_year}
+			AND
+				member_month = #{member_month}
+			AND
+				member_day = #{member_day}
+			AND
+				member_name = #{member_name}
+			AND
+				member_del_gb = 'N'
+		]]>
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="selectFindPw" parameterType="HashMap" resultType="String">
+		<![CDATA[
+			SELECT
+				MEMBER_PASSWD
+			FROM
+				KSM_MEMBER
+			WHERE
+				member_id = #{member_id}
+			AND
+				member_phone = #{member_phone}
+			AND
+				member_del_gb = 'N'
+		]]>
+	</select>
+	<select id="selectMemberInfoList" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT
+				member_no,
+				member_id,
+				member_passwd,
+				member_name,
+				member_year,
+				member_month,
+				member_day,
+				member_gender,
+				member_phone,
+				member_email,
+				member_zipcode,
+				member_addr1,
+				member_addr2,
+				member_addr3
+			FROM
+				KSM_MEMBER
+			WHERE
+				member_id=#{member_id}
+		]]>
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMember" parameterType="HashMap">
+		<![CDATA[
+			UPDATE 
+				KSM_MEMBER 
+			SET 
+				MEMBER_PASSWD = #{member_passwd},
+      			MEMBER_PHONE = #{member_phone},
+      			MEMBER_EMAIL = #{member_email},
+      			MEMBER_ZIPCODE = #{member_zipcode},
+      			MEMBER_ADDR1 = #{member_addr1},
+      			MEMBER_ADDR2 = #{member_addr2},
+      			MEMBER_ADDR3 = #{member_addr3}
+			WHERE 
+				MEMBER_ID = #{member_id}
+		]]>
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<update id="updateMemDelete" parameterType="HashMap">
+		<![CDATA[
+			UPDATE 
+				ksm_member 
+			SET 
+				member_del_gb = 'Y' 
+			WHERE 
+				member_id = #{member_id}
+			AND
+				member_del_gb = 'N'
+		]]>
+	</update>
+	
+	<select id="memberCouponList" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT
+				COU_NO, 
+				COU_ORIGIN_NO,
+				COU_CONTENT,
+				COU_DISCOUNT,
+				TO_CHAR(COU_SDATE, 'YYYY-MM-DD') AS COU_SDATE, 
+				TO_CHAR(COU_EDATE, 'YYYY-MM-DD') AS COU_EDATE,
+				COU_STATE 
+			FROM 
+				COUPON_MEMLIST 
+			WHERE 
+				MEMBER_ID = #{member_id}
+		]]>
+	</select>
+	<select id="memberCouponList2" parameterType="HashMap" resultType="HashMap">
+			SELECT
+				COU_NO, 
+				COU_ORIGIN_NO,
+				COU_CONTENT,
+				COU_DISCOUNT,
+				TO_CHAR(COU_SDATE, 'YYYY-MM-DD') AS COU_SDATE, 
+				TO_CHAR(COU_EDATE, 'YYYY-MM-DD') AS COU_EDATE,
+				COU_STATE 
+			FROM 
+				COUPON_MEMLIST 
+			WHERE 
+				MEMBER_ID = #{member_id}
+			AND
+			<if test='searchname.equals("sContent")'>
+				COU_CONTENT LIKE '%${searchtext}%'
+			</if>
+			<if test='searchname.equals("sDiscount")'>
+				COU_DISCOUNT LIKE '%${searchtext}%'
+			</if>
+	</select>
+	
+	<select id="memberCouponCount" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT 
+				count(*) AS RESULT
+			FROM 
+				COUPON_MEMLIST 
+			WHERE 
+				cou_state ='2' 
+			AND 
+				MEMBER_ID=#{member_id}
+		]]>
+	</select>
+	
+	<update id="updateCouState" parameterType="HashMap">
+		<![CDATA[
+			UPDATE 
+				COUPON_MEMLIST 
+			SET 
+				COU_STATE = '3'
+			WHERE 
+				cou_no = #{cou_no}
+		]]>
+	</update>
+	
+	<select id="MemAlertPass" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+		SELECT
+			MEMBER_PASSWD
+		FROM
+			KSM_MEMBER
+		WHERE
+			member_id=#{memalert}
+		]]>
+	</select>
+	
+	<!-- 등급업 쿠폰주기 시작 -->
+	<select id="memberGrade" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+		SELECT 
+			MEMBER_ID,
+			MEMBER_MEM_GB
+		FROM 
+			KSM_MEMBER 
+		WHERE 
+			MEMBER_ID = #{member_id}
+		]]>
+	</select>
+	
+	<select id="memberpurchaseList" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT 
+				b.ORDER_NO,
+				c.ITEM_SHORTPATH,
+				b.ORDERITEM_NAME,
+				b.ORDERITEM_COUNT,
+				b.ORDERITEM_SIZE,
+				b.ORDERITEM_COLOR,
+				b.ORDERITEM_OPTION,
+				b.ORDERITEM_PRICE,
+				TO_CHAR(b.ORDERITEM_DATE, 'YYYY-MM-DD') AS ORDERITEM_DATE,
+				b.ORDERITEM_STATE
+			FROM 
+				ORDERLIST a,
+				ORDERDETAIL b, 
+				ITEM c 
+			WHERE 
+				a.ORDER_NO=b.ORDER_NO 
+			and 
+				b.ITEM_NO=c.ITEM_NO 
+			and 
+				a.MEMBER_ID=#{member_id}
+		]]>
+	</select>
+	
+	<select id="nonmemberpurchaseList" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT 
+				b.ORDER_NO,
+				c.ITEM_SHORTPATH,
+				b.ORDERITEM_NAME,
+				b.ORDERITEM_COUNT,
+				b.ORDERITEM_SIZE,
+				b.ORDERITEM_COLOR,
+				b.ORDERITEM_OPTION,
+				b.ORDERITEM_PRICE,
+				TO_CHAR(b.ORDERITEM_DATE, 'YYYY-MM-DD') AS ORDERITEM_DATE,
+				b.ORDERITEM_STATE
+			FROM 
+				ORDERLIST a,
+				ORDERDETAIL b, 
+				ITEM c 
+			WHERE 
+				a.ORDER_NO=b.ORDER_NO 
+			and 
+				b.ITEM_NO=c.ITEM_NO 
+			and 
+				a.ORDER_NAME=#{nonmemname}
+		]]>
+	</select>
+	
+
+	<!-- 오더부분추가 -->
+	 <!-- 추가된부분 -다시 갱신하셔야합니다, 수정부분있습니다 -->
+	<select id="selectMemberInfoList2" parameterType="HashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT
+				member_no,
+				member_id,
+				member_passwd,
+				member_name,
+				member_year,
+				member_month,
+				member_day,
+				member_gender,
+				member_phone,
+				member_email,
+				member_zipcode,
+				member_addr1,
+				member_addr2,
+				member_addr3,
+				member_total,
+				MEMBER_MILEAGE
+			FROM
+				KSM_MEMBER
+			WHERE
+				member_id=#{member_id}
+		]]>
+	</select>
+	
+	<!-- 추가된부분2 : 받아오는 부분이 total이 아닌 적립금임 -->
+	<update id="updateMemberTotal" parameterType="HashMap">
+		<![CDATA[
+			UPDATE 
+				KSM_MEMBER 
+			SET 
+				MEMBER_MILEAGE = #{MEMBER_TOTAL}
+			WHERE 
+				MEMBER_ID = #{MEMBER_ID}
+		]]>
+	</update>
+	
+	
+		<!-- 추가된부분3 -->
+	<update id="updateCouponState" parameterType="HashMap">
+		<![CDATA[
+			UPDATE 
+				coupon_memlist 
+			SET 
+				COU_STATE = 1
+				COU_USEDATE = sysdate 
+			WHERE 
+				MEMBER_ID = #{MEMBER_ID}
+			AND
+				COU_NO = #{COU_NO}
+		]]>
+	</update>
+	
+	
+		<!-- 추가된부분4 : 받아오는 부분이 paymentTotal 임 -->
+	<update id="updateMemberTotal2" parameterType="HashMap">
+		<![CDATA[
+			UPDATE 
+				KSM_MEMBER 
+			SET 
+				MEMBER_TOTAL = MEMBER_TOTAL + #{MEMBER_TOTAL2}
+			WHERE 
+				MEMBER_ID = #{MEMBER_ID}
+		]]>
+	</update>
+</mapper>

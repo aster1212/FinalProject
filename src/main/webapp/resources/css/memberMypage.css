@@ -1,0 +1,176 @@
+@font-face 
+{ 
+	font-family: "A Bebedera"; 
+	src: url('../font/A Bebedera.ttf');
+}
+#mypageDiv
+{
+	width: 1000px;
+	margin:0 auto;
+}
+#mypageTitle
+{
+	text-shadow: 0px 1px 15px #50DEAA;
+	text-align : center;
+	font-family: "A Bebedera";
+	font-size:50px;
+	margin-top: 100px;
+}
+#mypageLine1
+{
+	border-bottom : solid 1px;
+	color: #BDBDBD;
+}
+@font-face 
+{ 
+	font-family: "NotoSansKR-Light"; 
+	src: url('../font/NotoSansKR-Light.otf');
+}
+#mypageName
+{
+	margin-right: 200px;
+	text-align:center;
+	font-family:NotoSansKR-Light;
+	font-weight:bold;
+	font-size: 20px;
+}
+#mypageID
+{
+	text-align:center;
+	margin-left:15px;
+	font-family:NotoSansKR-Light;
+	font-size: 15px;
+	color: #8C8C8C;
+}
+#memModifyBtn
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 100px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#memModifyBtn:hover
+{
+	border: none;
+	outline:none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 100px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#mypageLine2
+{
+	border-bottom : solid 1px;
+	color: #BDBDBD;
+}
+#mypageLike:hover
+{
+	content : url('/kingsman/resources/upload/mypageLike1.png');
+}
+#mypageBasket1:hover
+{
+	content : url('/kingsman/resources/upload/mypageBasket1.png');
+}
+#mypageCoupon
+{
+	margin-top: 50px;
+	font-family: "NotoSansKR-Light";
+	font-size: 20px;
+	font-weight:bold;
+}
+#mypageCoupon2
+{
+	margin-top: 20px;
+}
+#CouponCount
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 100px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#CouponCount:hover
+{
+	border: none;
+	outline:none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 100px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#mypageMileage
+{
+	margin-top: 40px;
+	font-family:NotoSansKR-Light;
+	font-size: 15px;
+	color: #8C8C8C;
+}
+#PurchaseMem
+{
+	border: none;
+	border-radius: 10px;
+	background-color: #000000;
+	width : 100px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#PurchaseMem:hover
+{
+	border: none;
+	outline:none;
+	border-radius: 10px;
+	background-color: #50DEAA;
+	width : 100px;
+	height: 30px;
+	text-align:center;
+	font-family: "NotoSansKR-Light";
+	font-size: 15px;
+	font-weight:bold;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+#mypageLogo
+{
+	text-align:center;
+	margin-top: 60px;
+}
+#Mypagelogo1:hover
+{
+	content : url('/kingsman/resources/upload/kingsman1.png');
+}
+#buttonMypageDel
+{
+	margin-top:70px;
+	text-align:right;
+}

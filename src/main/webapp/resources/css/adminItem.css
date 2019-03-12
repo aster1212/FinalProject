@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+#csContentBox{
+	width: 100%; 
+	height: auto; 
+	margin: 0 auto; 
+	text-align: left;
+}
+
+#csAdminForm{
+	margin-left: 250px;
+	width: 70%;	
+	min-height: 700px;
+}
+
+#itemLeft{
+	width:49%;
+}
+#itemRight{
+	width:49%;
+}
+.partition{
+	display: inline-block;
+	float:left;
+	margin-left:5px;
+}
+#middlePart{
+	width : 2px;
+	height: 500px;
+	background: #aaaaaa;
+}
+#hideDiv{
+	display: none;
+}
+.Title{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	display: inline-block;
+	background: #dbf6ec;
+	padding : 0 0 0 30px;
+	text-align: left;
+	font-size:32px;
+	margin-bottom: 10px;
+}
+
+.subTitle{
+	width:100%;
+	height:40px;
+	line-height: 40px;
+	background: #ebebeb;
+	font-size: 25px;
+	margin-bottom: 5px;
+}
+.inputs{
+	outline: none;
+	border:none;
+	border: 1px solid #676767;
+	border-radius: 5px;
+}
+
+.itemColorArray{
+	width: 32px;
+	height: 25px;
+	border: none;
+	background: white;
+	outline : none;
+}
+.itemBtn{
+	background:white;
+	width: 60px;
+	height: 30px;
+	border-style: none;
+	border: 2px solid #50DEAA;
+	border-radius: 12px;
+	margin: 0 0 0 5px;
+	outline: none;
+	font-size: 15px;
+}
+
+/* add */
+.filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #fff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #5cb85c;
+  cursor: pointer;
+  border: 1px solid #4cae4c;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #6ed36e;
+}
+
+.filebox label:active {
+  background-color: #367c36;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* add + */
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: '사진 등록';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+  outline:none;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
